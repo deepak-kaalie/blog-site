@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { BlogContent } from "@/components/blog-content";
-import { getBlogBySlug, blogPosts } from "@/data/blog";
+import { posts, type Post } from "@/lib/posts";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -12,14 +12,14 @@ interface BlogPostPageProps {
 }
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogBySlug(slug);
+  const post = posts.find((p) => p.slug === slug);
   if (!post) return { title: "Post not found" };
   return {
     title: `${post.title} | Page & Spine Blog`,
@@ -29,7 +29,7 @@ export async function generateMetadata({
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getBlogBySlug(slug);
+  const post = posts.find((p) => p.slug === slug);
 
   if (!post) notFound();
 
