@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { blogPosts } from "@/data/blog";
+import { posts } from "@/lib/posts";
 import { ArrowRight, Calendar, Clock, Newspaper } from "lucide-react";
 import type { Metadata } from "next";
 
@@ -52,7 +52,7 @@ export default function BlogPage() {
 
       <section className="py-12 px-4" aria-label="Blog posts">
         <ul className="mx-auto grid max-w-4xl gap-8">
-          {blogPosts.map((post) => (
+          {posts.map((post) => (
             <li key={post.slug}>
               <Card className="glass overflow-hidden border-white/15 transition-all hover:shadow-xl hover:border-white/25">
                 <div className="grid gap-6 sm:grid-cols-[280px_1fr]">
