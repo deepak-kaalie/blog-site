@@ -1,0 +1,5 @@
+# Book Store
+
+blog site about books
+
+Sitemap: https://yoursite.com/sitemap.xml
